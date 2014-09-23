@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Barometer.h"
 
-@interface ViewController : UIViewController
-
-
+@interface ViewController : UIViewController <BarometerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *localPressureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *seaLevelPressureLabel;
+@property (strong,nonatomic) Barometer *barometerObject;
 @end
 

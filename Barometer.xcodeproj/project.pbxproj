@@ -14,6 +14,8 @@
 		6A2FF63E19D1F57C00965559 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A2FF63D19D1F57C00965559 /* Images.xcassets */; };
 		6A2FF64119D1F57C00965559 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A2FF63F19D1F57C00965559 /* LaunchScreen.xib */; };
 		6A2FF64D19D1F57D00965559 /* BarometerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2FF64C19D1F57D00965559 /* BarometerTests.m */; };
+		6A2FF65819D1F59E00965559 /* Barometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2FF65719D1F59E00965559 /* Barometer.m */; };
+		6A2FF65919D1F8F300965559 /* Barometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2FF65719D1F59E00965559 /* Barometer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		6A2FF64619D1F57D00965559 /* BarometerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BarometerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A2FF64B19D1F57D00965559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A2FF64C19D1F57D00965559 /* BarometerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarometerTests.m; sourceTree = "<group>"; };
+		6A2FF65619D1F59E00965559 /* Barometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barometer.h; sourceTree = "<group>"; };
+		6A2FF65719D1F59E00965559 /* Barometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barometer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		6A2FF62419D1F57C00965559 = {
 			isa = PBXGroup;
 			children = (
+				6A2FF65619D1F59E00965559 /* Barometer.h */,
+				6A2FF65719D1F59E00965559 /* Barometer.m */,
 				6A2FF62F19D1F57C00965559 /* Barometer */,
 				6A2FF64919D1F57D00965559 /* BarometerTests */,
 				6A2FF62E19D1F57C00965559 /* Products */,
@@ -168,6 +174,7 @@
 				TargetAttributes = {
 					6A2FF62C19D1F57C00965559 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = P5B29F2NAM;
 					};
 					6A2FF64519D1F57D00965559 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -222,6 +229,7 @@
 				6A2FF63919D1F57C00965559 /* ViewController.m in Sources */,
 				6A2FF63619D1F57C00965559 /* AppDelegate.m in Sources */,
 				6A2FF63319D1F57C00965559 /* main.m in Sources */,
+				6A2FF65819D1F59E00965559 /* Barometer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A2FF64D19D1F57D00965559 /* BarometerTests.m in Sources */,
+				6A2FF65919D1F8F300965559 /* Barometer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
