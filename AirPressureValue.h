@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface AirPressureValue : NSObject
-
+-(id)initWithkiloPascals:(float)kiloPascals;
+-(float)kiloPascals;
+-(float)mmHg;
+-(float)psi;
+-(float)inHg;
+-(AirPressureValue *)convertToSeaLevelFromAltitude:(float)altitude;
 @end

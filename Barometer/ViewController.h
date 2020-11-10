@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Barometer.h"
-
-@interface ViewController : UIViewController <BarometerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *localPressureLabel;
-@property (weak, nonatomic) IBOutlet UILabel *seaLevelPressureLabel;
+#import <CoreLocation/CoreLocation.h>
+@interface ViewController : UIViewController <BarometerDelegate, CLLocationManagerDelegate>
 @property (strong,nonatomic) Barometer *barometerObject;
 @end
 

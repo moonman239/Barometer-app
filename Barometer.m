@@ -10,64 +10,39 @@
 
 
 @implementation Barometer
+{
+    CMAltimeter *altimeter;
+    NSInteger elevation;
+}
+
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        altimeter = [[CMAltimeter alloc] init];
+    }
+    return self;
+}
+
 
 -(void)startUpdatingPressureData
 {
     if ([CMAltimeter isRelativeAltitudeAvailable])
     {
-        NSOperationQueue *queue = [NSOperationQueue mainQueue];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        void(^altHandler)(CMAltitudeData *data, NSError *error) = ^(CMAltitudeData *data, NSError *error) {
+            if (!error) {
+                AirPressureValue *value = [[AirPressureValue alloc] initWithkiloPascals:[[data pressure] floatValue]];
+                [(NSObject *)[self delegate] performSelectorOnMainThread:@selector(dataUpdated:) withObject:value waitUntilDone:true];
+            }
+            else
+            {
+                [(NSObject *)[self delegate] performSelectorOnMainThread:@selector(pressureDataUnavailable:) withObject:error waitUntilDone:true];
+            }
+        };
     [queue addOperationWithBlock:^(void) { NSLog(@"Updating altitude data."); } ];
-        [altimeter startRelativeAltitudeUpdatesToQueue:queue withHandler:^(CMAltitudeData *data, NSError *error) {
-            NSLog(@"%@",@"Altitude update received.");
-            [self performSelectorOnMainThread:@selector(dataUpdated:) withObject:data waitUntilDone:false];
-        }];
-        NSLog(@"%lu",(unsigned long)[queue operationCount]);
-    if ([self enableSeaLevelPressure] == [NSNumber numberWithBool:true])
-    {
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    [locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [locationManager setDelegate:self];
-    NSLog(@"%@",@"Subscribing to location updates.");
-    [locationManager startUpdatingLocation];
+        [altimeter startRelativeAltitudeUpdatesToQueue:queue withHandler:altHandler];
     }
-    }
-    else
-    {
-        NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"Can't retrieve altimeter data",NSLocalizedDescriptionKey, nil];
-        NSError *error = [[NSError alloc] initWithDomain:@"altitude" code:050 userInfo:errorInfo];
-        [[self delegate] pressureDataUnavailable:error];
-    }
-}
-
--(void)dataUpdated:(CMAltitudeData *)data
-{
-    if ([[self delegate] respondsToSelector:@selector(localPressureReadingUpdated:)]) {
-        localPressureFloat = [[data pressure] floatValue];
-        [[self delegate] localPressureReadingUpdated:localPressureFloat];
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    NSLog(@"%@", @"Location received.");
-    CLLocation *lastLocation = [locations lastObject];
-    if ([[lastLocation timestamp] timeIntervalSinceNow] < 15)
-    {
-        elevation = [lastLocation altitude];
-        
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    [[self delegate] pressureDataUnavailable:error];
-}
-
--(void)seaLevelPressureDataUpdated
-{
-    float seaLevelPressure = localPressureFloat / powf((1.00 - 2.25577/100000),5.25588);
-    NSNumber *seaLevelPressureNumber = [NSNumber numberWithFloat:seaLevelPressure];
 }
 
 @end
